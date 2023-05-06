@@ -1,0 +1,74 @@
+Building A GraphQL API
+======================
+
+Follow the instructions below to create a GraphQL server.
+
+In any convenient location, create a new directory named "graphql-api".
+
+Open a command prompt within the newly created directory and run the command "npm init -y".
+
+Still within the "graphql-api" directory, run the command "npm install apollo-server@^2 graphql@^14.6.0".
+
+Within the "graphql-api" directory, create a subdirectory named "src".
+
+Within the newly created "src" directory, create a new empty file named "index.js", containing the text given between the horizontal lines below.
+
+____
+
+const { ApolloServer } = require("apollo-server");
+
+const typeDefs = `
+  type Query {
+    info: String!
+  }
+`;
+
+const resolvers =
+{
+	Query:
+	{
+		info: () => "This is a GraphQL API."
+	}
+}
+
+const server = new ApolloServer
+({
+  	typeDefs,
+  	resolvers,
+});
+
+server.listen().then
+(
+	( server ) => console.log("Server is running on " + server.url + "...")
+);
+
+____
+
+From within the graphql-api directory, run the command "node src/index.js".
+
+Start a web browser and, in the address bar, enter the value "http://localhost:4000".
+
+In the left-hand pane of the web page, enter the text given between the horizontal lines below.
+
+____
+
+query {
+  info
+}
+____
+
+Click the Play button, which is located between the left and right panes, and rendered as a triangle in a circle.
+
+Verify that text appears matching that given between the horizontal lines below.
+
+____
+
+{
+  "data": {
+    "info": "This is a GraphQL API."
+  }
+}
+
+___
+
+
